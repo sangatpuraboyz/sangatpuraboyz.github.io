@@ -1,597 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sangatpura Boyz Entertainment | Sangatpura Dhaipai</title>
-
-    <meta name="description"
-        content="Sangatpura Boyz Entertainment - Official digital platform of Village Sangatpura Dhaipai, Jagraon, Punjab. Watch village events, religious programs, cultural shows, live streams and entertainment videos.">
-
-    <meta name="keywords"
-        content="Sangatpura Boyz Entertainment, Sangatpura Dhaipai, Jagraon, Punjab, Punjabi Village, Live Streaming, Punjabi Videos, Village Events">
-
-    <meta name="author" content="BALRAJ SINGH BOBBY">
-
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sangatpura Boyz Entertainment</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+<img src="logo.png" alt="Sangatpura Boyz Logo" class="logo">
+<header>
+<h1>Sangatpura Boyz Entertainment</h1>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="gallery.html">Gallery</a>
+<a href="videos.html">Videos</a>
+<a href="live.html">Live</a>
+<a href="news.html">News</a>
+<a href="contact.html">Contact</a>
+</nav>
+<section class="quick-links">
+
+<a href="gallery.html">📸 Gallery</a>
+
+<a href="videos.html">🎥 Videos</a>
+
+<a href="live.html">🔴 Live</a>
+
+<a href="news.html">📰 News</a>
+
+<a href="contact.html">📞 Contact</a>
+
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="gallery.html">📸 Gallery</a>
+<a href="videos.html">🎥 Videos</a>
+<a href="live.html">🔴 Live</a>
+<a href="news.html">📰 News</a>
+<a href="contact.html">📞 Contact</a>
+</nav>
 
-    
+</section>
+</header>
 
-    <header>
+<section class="hero">
+<h2>Welcome to Sangatpura Boyz Entertainment</h2>
+<section class="features">
 
-        <div class="header-content">
+<div class="feature">
+<h3>📸 Photo Gallery</h3>
+<p>See beautiful moments from Village Sangatpura Dhaipai.</p>
+<a class="btn" href="gallery.html">Open Gallery</a>
+</div>
 
-            <img src="logo.png"
-                 alt="Sangatpura Boyz Entertainment Logo"
-                 class="logo">
+<div class="feature">
+<h3>🎥 Latest Videos</h3>
+<p>Watch our latest YouTube videos.</p>
+<a class="btn" href="videos.html">Watch Videos</a>
+</div>
 
-            <div>
-                <h1>Sangatpura Boyz Entertainment</h1>
-                <p>Village Sangatpura Dhaipai • Jagraon • Punjab</p>
-            </div>
+<div class="feature">
+<h3>🔴 Live Streaming</h3>
+<p>Join live religious and cultural events.</p>
+<a class="btn" href="live.html">Watch Live</a>
+</div>
 
-        </div>
+<div class="feature">
+<h3>📰 Village News</h3>
+<p>Latest announcements and village updates.</p>
+<a class="btn" href="news.html">Read News</a>
+</div>
 
-        <nav>
+</section>
 
-            <a href="index.html">🏠 Home</a>
+<p>
+Official Digital Platform of Village Sangatpura Dhaipai, Jagraon, Punjab
+</p>
 
-            <a href="gallery.html">📸 Gallery</a>
+<a class="btn" href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8" target="_blank">
+▶ Visit YouTube Channel
+</a>
 
-            <a href="videos.html">🎥 Videos</a>
+</section>
 
-            <a href="live.html">🔴 Live</a>
+<section>
+<h2>About Us</h2>
+7
+<section class="latest">
+<h2>Latest Updates</h2>
 
-            <a href="news.html">📰 News</a>
+<div class="update-box">
+<h3>📹 Latest Videos</h3>
+<p>Watch our latest religious and cultural programs on YouTube.</p>
+<a class="btn" href="videos.html">View Videos</a>
+</div>
 
-            <a href="contact.html">📞 Contact</a>
+<div class="update-box">
+<h3>📸 Photo Gallery</h3>
+<p>Explore beautiful moments from Village Sangatpura Dhaipai.</p>
+<a class="btn" href="gallery.html">Open Gallery</a>
+</div>
 
-        </nav>
+<div class="update-box">
+<h3>🔴 Live Streaming</h3>
+<p>Watch live events directly from our official platform.</p>
+<a class="btn" href="live.html">Watch Live</a>
+</div>
 
-    </header>
+</section>
+<p>
+Sangatpura Boyz Entertainment is the official digital platform of Village Sangatpura Dhaipai.
+We share religious programs, cultural events, village news, live shows and entertainment videos.
+</p>
 
+<p>
+<b>Owner:</b> BALRAJ SINGH BOBBY
+</p>
 
-    
+</section>
 
-    <section class="hero">
+<footer>
 
-        <div class="hero-content">
+<p>© 2026 Sangatpura Boyz Entertainment</p>
 
-            <p class="welcome">WELCOME TO</p>
+<section class="social">
+<h2>Follow Sangatpura Boyz Entertainment</h2>
 
-            <h2>Sangatpura Boyz Entertainment</h2>
+<a class="social-btn" href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8" target="_blank">▶ YouTube</a>
 
-            <p>
-                Official Digital Platform of Village Sangatpura Dhaipai,
-                Jagraon, Punjab
-            </p>
+<a class="social-btn" href="#">📘 Facebook</a>
 
-            <div class="hero-buttons">
+<a class="social-btn" href="#">📷 Instagram</a>
 
-                <a class="btn"
-                   href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8"
-                   target="_blank">
-                    ▶ Visit YouTube
-                </a>
+</section>
 
-                <a class="btn secondary-btn"
-                   href="gallery.html">
-                    📸 Explore Gallery
-                </a>
+<section class="stats">
 
-            </div>
+<h2>Why Choose Sangatpura Boyz Entertainment?</h2>
 
-        </div>
+<div class="stats-grid">
 
-    </section>
+<div class="stat-box">
+<h3>📺 100+</h3>
+<p>Videos Published</p>
+</div>
 
+<div class="stat-box">
+<h3>🎥 Live</h3>
+<p>Religious & Cultural Events</p>
+</div>
 
-    
-    <section class="quick-links">
+<div class="stat-box">
+<h3>📸 Gallery</h3>
+<p>Village Photo Collection</p>
+</div>
 
-        <a href="gallery.html">
-            📸
-            <span>Gallery</span>
-        </a>
+<div class="stat-box">
+<h3>❤️ Community</h3>
+<p>Serving Sangatpura Since 2017</p>
+</div>
 
-        <a href="videos.html">
-            🎥
-            <span>Videos</span>
-        </a>
+</div>
 
-        <a href="live.html">
-            🔴
-            <span>Live</span>
-        </a>
+</section>
 
-        <a href="news.html">
-            📰
-            <span>News</span>
-        </a>
+<section class="featured-video">
 
-        <a href="contact.html">
-            📞
-            <span>Contact</span>
-        </a>
+<section class="events">
 
-    </section>
+<h2>📅 Upcoming Events</h2>
 
+<div class="event">
 
-    
-    <section class="features">
+<h3>🙏 Religious Programs</h3>
 
-        <div class="section-heading">
+<p>Live Kirtan, Nagar Kirtan, Gurpurab & Samagam Updates.</p>
 
-            <p>EXPLORE OUR PLATFORM</p>
+</div>
 
-            <h2>Everything in One Place</h2>
+<div class="event">
 
-        </div>
+<h3>🎭 Cultural Events</h3>
 
+<p>Village Mela, Teeyan, Sports Tournament & Entertainment Shows.</p>
 
-        <div class="feature-grid">
+</div>
 
-            <div class="feature">
+<div class="event">
 
-                <div class="feature-icon">📸</div>
+<h3>📢 Village Announcements</h3>
 
-                <h3>Photo Gallery</h3>
+<p>Latest announcements from Sangatpura Dhaipai.</p>
 
-                <p>
-                    Explore beautiful moments from
-                    Village Sangatpura Dhaipai.
-                </p>
+</div>
 
-                <a class="btn"
-                   href="gallery.html">
-                    Open Gallery
-                </a>
+</section>
+<h2>🎥 Featured Video</h2>
 
-            </div>
+<iframe
+width="100%"
+height="450"
+src="https://www.youtube.com/embed?listType=user_uploads&list=SangatpuraBoyz"
+title="Sangatpura Boyz Entertainment"
+frameborder="0"
+allowfullscreen>
+</iframe>
 
+<br><br>
 
-            <div class="feature">
+<a class="btn" href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8" target="_blank">
+View All Videos
+</a>
+</section>
+</footer>
+<footer>
+<h3>Sangatpura Boyz Entertainment</h3>
 
-                <div class="feature-icon">🎥</div>
+<p>Owner: BALRAJ SINGH BOBBY</p>
 
-                <h3>Latest Videos</h3>
+<p>Village Sangatpura Dhaipai, Jagraon, Punjab</p>
 
-                <p>
-                    Watch religious programs,
-                    cultural events and entertainment.
-                </p>
+<p>
+<a href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8" target="_blank">
+▶ Official YouTube Channel
+</a>
+</p>
 
-                <a class="btn"
-                   href="videos.html">
-                    Watch Videos
-                </a>
+<p>© 2026 All Rights Reserved.</p>
+<section class="about-owner">
 
-            </div>
+<h2>About the Founder</h2>
 
+<div class="owner-card">
 
-            <div class="feature">
+<h3>BALRAJ SINGH BOBBY</h3>
 
-                <div class="feature-icon">🔴</div>
+<p>
+Founder & Owner of Sangatpura Boyz Entertainment.
+Dedicated to promoting the religious, cultural and social activities of Village Sangatpura Dhaipai through digital media.
+</p>
 
-                <h3>Live Streaming</h3>
+<a class="btn" href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8" target="_blank">
+Visit Official YouTube
+</a>
 
-                <p>
-                    Watch live religious and
-                    cultural events.
-                </p>
+</div>
 
-                <a class="btn"
-                   href="live.html">
-                    Watch Live
-                </a>
+</section>
+</footer>
 
-            </div>
+<script src="script.js"></script>
 
-
-            <div class="feature">
-
-                <div class="feature-icon">📰</div>
-
-                <h3>Village News</h3>
-
-                <p>
-                    Get the latest announcements
-                    and village updates.
-                </p>
-
-                <a class="btn"
-                   href="news.html">
-                    Read News
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    
-    <section class="about">
-
-        <div class="section-heading">
-
-            <p>ABOUT US</p>
-
-            <h2>Sangatpura Boyz Entertainment</h2>
-
-        </div>
-
-        <div class="about-content">
-
-            <p>
-                Sangatpura Boyz Entertainment is the official
-                digital platform of Village Sangatpura Dhaipai,
-                Jagraon, Punjab.
-            </p>
-
-            <p>
-                We share religious programs, cultural events,
-                village news, live shows and entertainment videos
-                with our community.
-            </p>
-
-            <p class="owner">
-                <strong>Owner:</strong>
-                BALRAJ SINGH BOBBY
-            </p>
-
-        </div>
-
-    </section>
-
-
-    
-
-    <section class="latest">
-
-        <div class="section-heading">
-
-            <p>STAY CONNECTED</p>
-
-            <h2>Latest Updates</h2>
-
-        </div>
-
-
-        <div class="update-grid">
-
-
-            <div class="update-box">
-
-                <div class="feature-icon">📹</div>
-
-                <h3>Latest Videos</h3>
-
-                <p>
-                    Watch our latest religious and
-                    cultural programs.
-                </p>
-
-                <a class="btn"
-                   href="videos.html">
-                    View Videos
-                </a>
-
-            </div>
-
-
-            <div class="update-box">
-
-                <div class="feature-icon">📸</div>
-
-                <h3>Photo Gallery</h3>
-
-                <p>
-                    Explore photos from village
-                    events and programs.
-                </p>
-
-                <a class="btn"
-                   href="gallery.html">
-                    Open Gallery
-                </a>
-
-            </div>
-
-
-            <div class="update-box">
-
-                <div class="feature-icon">🔴</div>
-
-                <h3>Live Streaming</h3>
-
-                <p>
-                    Watch live events directly
-                    from our platform.
-                </p>
-
-                <a class="btn"
-                   href="live.html">
-                    Watch Live
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    
-
-    <section class="stats">
-
-        <div class="section-heading">
-
-            <p>OUR JOURNEY</p>
-
-            <h2>Sangatpura Boyz Entertainment</h2>
-
-        </div>
-
-
-        <div class="stats-grid">
-
-
-            <div class="stat-box">
-
-                <h3>100+</h3>
-
-                <p>Videos Published</p>
-
-            </div>
-
-
-            <div class="stat-box">
-
-                <h3>2017</h3>
-
-                <p>Since</p>
-
-            </div>
-
-
-            <div class="stat-box">
-
-                <h3>LIVE</h3>
-
-                <p>Events & Programs</p>
-
-            </div>
-
-
-            <div class="stat-box">
-
-                <h3>❤️</h3>
-
-                <p>Community</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    
-
-    <section class="featured-video">
-
-        <div class="section-heading">
-
-            <p>WATCH NOW</p>
-
-            <h2>Featured Video</h2>
-
-        </div>
-
-        <div class="video-container">
-
-            <!-- YouTube video can be added here -->
-
-            <div class="video-placeholder">
-
-                <div class="feature-icon">🎥</div>
-
-                <h3>Sangatpura Boyz Entertainment</h3>
-
-                <p>
-                    Watch our latest videos on YouTube.
-                </p>
-
-                <a class="btn"
-                   href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8"
-                   target="_blank">
-                    ▶ Watch on YouTube
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    
-
-    <section class="events">
-
-        <div class="section-heading">
-
-            <p>EVENTS & PROGRAMS</p>
-
-            <h2>What's Happening</h2>
-
-        </div>
-
-
-        <div class="event-grid">
-
-
-            <div class="event">
-
-                <div class="feature-icon">🙏</div>
-
-                <h3>Religious Programs</h3>
-
-                <p>
-                    Live Kirtan, Gurpurab,
-                    Samagam and Nagar Kirtan updates.
-                </p>
-
-            </div>
-
-
-            <div class="event">
-
-                <div class="feature-icon">🎭</div>
-
-                <h3>Cultural Events</h3>
-
-                <p>
-                    Village Mela, Teeyan,
-                    cultural shows and entertainment.
-                </p>
-
-            </div>
-
-
-            <div class="event">
-
-                <div class="feature-icon">📢</div>
-
-                <h3>Village Announcements</h3>
-
-                <p>
-                    Latest announcements and
-                    important village updates.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    
-
-    <section class="about-owner">
-
-        <div class="section-heading">
-
-            <p>OUR FOUNDER</p>
-
-            <h2>About the Founder</h2>
-
-        </div>
-
-
-        <div class="owner-card">
-
-            <div class="owner-icon">
-                👤
-            </div>
-
-            <h3>BALRAJ SINGH BOBBY</h3>
-
-            <p>
-                Founder & Owner of Sangatpura Boyz Entertainment.
-            </p>
-
-            <p>
-                Dedicated to promoting the religious,
-                cultural and social activities of
-                Village Sangatpura Dhaipai through digital media.
-            </p>
-
-            <a class="btn"
-               href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8"
-               target="_blank">
-                ▶ Official YouTube
-            </a>
-
-        </div>
-
-    </section>
-
-
-
-    <section class="social">
-
-        <div class="section-heading">
-
-            <p>FOLLOW US</p>
-
-            <h2>Sangatpura Boyz Entertainment</h2>
-
-        </div>
-
-
-        <div class="social-buttons">
-
-            <a class="social-btn"
-               href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8"
-               target="_blank">
-                ▶ YouTube
-            </a>
-
-            <a class="social-btn"
-               href="#"
-               target="_blank">
-                📘 Facebook
-            </a>
-
-            <a class="social-btn"
-               href="#"
-               target="_blank">
-                📷 Instagram
-            </a>
-
-        </div>
-
-    </section>
-
-
-    
-
-    <footer>
-
-        <h3>Sangatpura Boyz Entertainment</h3>
-
-        <p>
-            Owner: BALRAJ SINGH BOBBY
-        </p>
-
-        <p>
-            Village Sangatpura Dhaipai,
-            Jagraon, Punjab
-        </p>
-
-        <p>
-            <a href="https://youtube.com/@sangatpuraboyz?si=DU057n4Uqhx8iEl8"
-               target="_blank">
-                ▶ Official YouTube Channel
-            </a>
-        </p>
-
-        <p class="copyright">
-            © 2026 Sangatpura Boyz Entertainment.
-            All Rights Reserved.
-        </p>
-
-    </footer>
-
-
+<a href="https://wa.me/" class="whatsapp" target="_blank">
+💬
+</a>
+</body>
+</html>
