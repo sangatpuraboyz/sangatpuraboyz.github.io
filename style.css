@@ -1147,3 +1147,44 @@ footer p {
     }
 
 }
+.channel-box{
+height:100%;
+min-height:315px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:35px;
+background:linear-gradient(135deg,#d50000,#000);
+color:#fff;
+}
+
+.channel-box h2{
+font-size:32px;
+margin-bottom:15px;
+}
+
+.channel-box p{
+font-size:17px;
+margin-bottom:25px;
+color:#eee;
+}
+
+.video iframe{
+width:100%;
+aspect-ratio:16/9;
+border:0;
+display:block;
+}
+
+.channel-box .btn{
+background:#fff;
+color:#d50000;
+border:none;
+}
+
+.channel-box .btn:hover{
+background:#000;
+color:#fff;
+}
