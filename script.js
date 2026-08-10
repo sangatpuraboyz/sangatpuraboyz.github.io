@@ -184,3 +184,216 @@ track.addEventListener("touchend",(e)=>{
 /* ---------- START ---------- */
 
 updateSlider();
+/* ==========================================================
+   PART 2 - LIGHTBOX
+========================================================== */
+
+const lightbox = document.querySelector(".photo-lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+
+const lightPrev = document.querySelector(".lightbox-prev");
+const lightNext = document.querySelector(".lightbox-next");
+const lightClose = document.querySelector(".lightbox-close");
+
+const downloadBtn = document.getElementById("downloadBtn");
+const shareBtn = document.getElementById("shareBtn");
+
+
+/* ---------- OPEN ---------- */
+
+function openLightbox(){
+
+    if(!lightbox || slides.length===0) return;
+
+    const img = slides[currentSlide].querySelector("img");
+
+    if(!img) return;
+
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+
+    if(downloadBtn){
+
+        downloadBtn.href = img.src;
+        downloadBtn.download = img.alt || "photo";
+
+    }
+
+    lightbox.classList.add("active");
+
+    document.body.classList.add("lightbox-open");
+
+}
+
+
+/* ---------- CLOSE ---------- */
+
+function closeLightbox(){
+
+    if(!lightbox) return;
+
+    lightbox.classList.remove("active");
+
+    document.body.classList.remove("lightbox-open");
+
+}
+
+
+/* ---------- UPDATE ---------- */
+
+function updateLightbox(){
+
+    if(!lightbox.classList.contains("active")) return;
+
+    const img = slides[currentSlide].querySelector("img");
+
+    if(!img) return;
+
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+
+    if(downloadBtn){
+
+        downloadBtn.href = img.src;
+
+    }
+
+}
+
+
+/* ---------- CLICK IMAGE ---------- */
+
+slides.forEach((slide,index)=>{
+
+    slide.addEventListener("click",()=>{
+
+        currentSlide=index;
+
+        updateSlider();
+
+        openLightbox();
+
+    });
+
+});
+
+
+/* ---------- NEXT ---------- */
+
+function nextImage(){
+
+    nextSlide();
+
+    updateLightbox();
+
+}
+
+
+/* ---------- PREVIOUS ---------- */
+
+function prevImage(){
+
+    prevSlide();
+
+    updateLightbox();
+
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+if(lightNext){
+
+    lightNext.addEventListener("click",nextImage);
+
+}
+
+if(lightPrev){
+
+    lightPrev.addEventListener("click",prevImage);
+
+}
+
+if(lightClose){
+
+    lightClose.addEventListener("click",closeLightbox);
+
+}
+
+
+/* ---------- OUTSIDE CLICK ---------- */
+
+if(lightbox){
+
+lightbox.addEventListener("click",(e)=>{
+
+    if(e.target===lightbox){
+
+        closeLightbox();
+
+    }
+
+});
+
+}
+
+
+/* ---------- KEYBOARD ---------- */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(!lightbox ||
+       !lightbox.classList.contains("active")) return;
+
+    if(e.key==="Escape"){
+
+        closeLightbox();
+
+    }
+
+    if(e.key==="ArrowRight"){
+
+        nextImage();
+
+    }
+
+    if(e.key==="ArrowLeft"){
+
+        prevImage();
+
+    }
+
+});
+
+
+/* ---------- MOBILE SWIPE ---------- */
+
+let lightStartX = 0;
+
+if(lightbox){
+
+lightbox.addEventListener("touchstart",(e)=>{
+
+    lightStartX = e.touches[0].clientX;
+
+});
+
+lightbox.addEventListener("touchend",(e)=>{
+
+    let lightEndX = e.changedTouches[0].clientX;
+
+    if(lightStartX-lightEndX>50){
+
+        nextImage();
+
+    }
+
+    if(lightEndX-lightStartX>50){
+
+        prevImage();
+
+    }
+
+});
+
+}
