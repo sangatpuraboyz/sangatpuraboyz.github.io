@@ -312,3 +312,359 @@ lightbox.addEventListener("touchend",(e)=>{
 });
 
 }
+/* ==========================================
+   PART 3 - DOWNLOAD, SHARE & ANIMATIONS
+========================================== */
+
+/* -------------------------
+   DOWNLOAD BUTTON
+------------------------- */
+
+if(downloadBtn){
+
+    downloadBtn.addEventListener("click",()=>{
+
+        const a=document.createElement("a");
+
+        a.href=lightboxImg.src;
+
+        a.download="Sangatpura-Boyz-Photo";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        document.body.removeChild(a);
+
+    });
+
+}
+
+
+/* -------------------------
+   SHARE BUTTON
+------------------------- */
+
+if(shareBtn){
+
+shareBtn.addEventListener("click",async()=>{
+
+    const imageURL=lightboxImg.src;
+
+    if(navigator.share){
+
+        try{
+
+            await navigator.share({
+
+                title:"Sangatpura Boyz Entertainment",
+
+                text:"Check out this photo.",
+
+                url:imageURL
+
+            });
+
+        }catch(err){}
+
+    }else{
+
+        try{
+
+            await navigator.clipboard.writeText(imageURL);
+
+            alert("Photo link copied.");
+
+        }catch(err){
+
+            prompt("Copy this link",imageURL);
+
+        }
+
+    }
+
+});
+
+}
+
+
+/* -------------------------
+   PAGE LOADER
+------------------------- */
+
+window.addEventListener("load",()=>{
+
+    const loader=document.getElementById("loader");
+
+    if(loader){
+
+        setTimeout(()=>{
+
+            loader.classList.add("hide");
+
+        },600);
+
+    }
+
+});
+
+
+/* -------------------------
+   FADE UP ANIMATION
+------------------------- */
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+        entry.target.classList.add("show");
+
+    }
+
+});
+
+},{
+threshold:0.15
+});
+
+
+document.querySelectorAll(
+
+".fade-up,.section-heading,.about-box,.big-card,.side-card,.gallery-slider,.contact-box,.social-btn"
+
+).forEach(el=>{
+
+    el.classList.add("fade-up");
+
+    observer.observe(el);
+
+});
+
+
+/* -------------------------
+   HERO TITLE ANIMATION
+------------------------- */
+
+const heroTitle=document.querySelector(".hero h1");
+
+if(heroTitle){
+
+heroTitle.animate([
+
+{
+
+opacity:0,
+
+transform:"translateY(40px)"
+
+},
+
+{
+
+opacity:1,
+
+transform:"translateY(0)"
+
+}
+
+],{
+
+duration:1200,
+
+fill:"forwards"
+
+});
+
+}
+
+
+/* -------------------------
+   HERO LOGO FLOAT
+------------------------- */
+
+const heroLogo=document.querySelector(".hero-logo");
+
+if(heroLogo){
+
+heroLogo.animate([
+
+{
+
+transform:"translateY(0px)"
+
+},
+
+{
+
+transform:"translateY(-8px)"
+
+},
+
+{
+
+transform:"translateY(0px)"
+
+}
+
+],{
+
+duration:3500,
+
+iterations:Infinity
+
+});
+
+}
+/* ==========================================
+   PART 4 - NAVIGATION & FINAL
+========================================== */
+
+/* Active Navigation */
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+window.addEventListener("scroll",()=>{
+
+    let current="";
+
+    sections.forEach(section=>{
+
+        const top=section.offsetTop-120;
+
+        const height=section.offsetHeight;
+
+        if(pageYOffset>=top && pageYOffset<top+height){
+
+            current=section.getAttribute("id");
+
+        }
+
+    });
+
+    navLinks.forEach(link=>{
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href")==="#"+current){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+
+/* Smooth Scroll */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+
+    anchor.addEventListener("click",function(e){
+
+        const target=document.querySelector(this.getAttribute("href"));
+
+        if(target){
+
+            e.preventDefault();
+
+            target.scrollIntoView({
+
+                behavior:"smooth",
+                block:"start"
+
+            });
+
+        }
+
+    });
+
+});
+
+
+/* Back To Top */
+
+const backTop=document.querySelector(".back-to-top");
+
+if(backTop){
+
+    backTop.style.opacity="0";
+    backTop.style.pointerEvents="none";
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY>400){
+
+            backTop.style.opacity="1";
+            backTop.style.pointerEvents="auto";
+
+        }else{
+
+            backTop.style.opacity="0";
+            backTop.style.pointerEvents="none";
+
+        }
+
+    });
+
+}
+
+
+/* Mobile Menu */
+
+const menuBtn=document.querySelector(".menu-btn");
+const nav=document.querySelector("nav");
+
+if(menuBtn && nav){
+
+    menuBtn.addEventListener("click",()=>{
+
+        nav.classList.toggle("show");
+
+    });
+
+}
+
+
+/* Close Mobile Menu */
+
+navLinks.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        if(nav){
+
+            nav.classList.remove("show");
+
+        }
+
+    });
+
+});
+
+
+/* Prevent Drag */
+
+document.querySelectorAll("img").forEach(img=>{
+
+    img.setAttribute("draggable","false");
+
+});
+
+
+/* Final Init */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    console.log("Sangatpura Boyz Entertainment Loaded Successfully");
+
+    if(typeof updateSlider==="function"){
+
+        updateSlider();
+
+    }
+
+});
