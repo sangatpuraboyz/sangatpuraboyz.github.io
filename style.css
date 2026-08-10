@@ -767,3 +767,38 @@ display:flex;
 }
 
 }
+/* LIVE SECTION */
+
+.live-section{
+
+padding:80px 5%;
+
+background:#fff;
+
+}
+
+.live-card{
+
+max-width:1000px;
+
+margin:auto;
+
+border-radius:15px;
+
+overflow:hidden;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+}
+
+.live-card iframe{
+
+width:100%;
+
+aspect-ratio:16/9;
+
+border:0;
+
+display:block;
+
+}
