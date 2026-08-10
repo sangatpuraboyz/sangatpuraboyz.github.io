@@ -340,3 +340,181 @@ window.onload=function(){
     updateSlider();
 
 };
+
+/* =====================================
+   PART 5A - PREMIUM EFFECTS
+=====================================*/
+
+/* Loader */
+
+#loader{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
+transition:.5s;
+}
+
+#loader.hide{
+opacity:0;
+visibility:hidden;
+}
+
+.loader-circle{
+width:70px;
+height:70px;
+border:5px solid rgba(255,255,255,.15);
+border-top:5px solid #e30613;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+
+/* Fade Animation */
+
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
+
+/* Glass Cards */
+
+.big-card,
+.side-card,
+.about-box,
+.contact-box{
+
+backdrop-filter:blur(10px);
+
+transition:.35s;
+
+}
+
+.big-card:hover,
+.side-card:hover,
+.about-box:hover,
+.contact-box:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 18px 45px rgba(0,0,0,.18);
+
+}
+
+
+/* Social Hover */
+
+.social-btn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.social-btn::before{
+
+content:"";
+
+position:absolute;
+
+left:-100%;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(255,255,255,.18);
+
+transition:.45s;
+
+}
+
+.social-btn:hover::before{
+
+left:100%;
+
+}
+
+
+/* Hero Animation */
+
+.hero-logo{
+
+animation:floatLogo 4s ease-in-out infinite;
+
+}
+
+@keyframes floatLogo{
+
+0%{transform:translateY(0);}
+
+50%{transform:translateY(-8px);}
+
+100%{transform:translateY(0);}
+
+}
+
+
+/* Smooth Image Zoom */
+
+.gallery-slide img{
+
+transition:transform .5s;
+
+}
+
+.gallery-slide:hover img{
+
+transform:scale(1.05);
+
+}
+
+
+/* Better Scrollbar */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#e30613;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#ff2b3b;
+
+}
