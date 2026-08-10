@@ -1,798 +1,342 @@
-/* ==========================================
+/* ===========================================
 SANGATPURA BOYZ ENTERTAINMENT
-PROFESSIONAL STYLE.CSS
-PART 4A
-========================================== */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+Professional Gallery Script
+=========================================== */
 
-html{
-scroll-behavior:smooth;
-}
+const track = document.querySelector(".gallery-track");
+const slides = document.querySelectorAll(".gallery-slide");
+const nextBtn = document.querySelector(".gallery-next");
+const prevBtn = document.querySelector(".gallery-prev");
+const dotsContainer = document.querySelector(".gallery-dots");
 
-body{
-font-family:'Poppins',sans-serif;
-background:#f5f5f5;
-color:#222;
-overflow-x:hidden;
-line-height:1.6;
-}
+const lightbox = document.querySelector(".photo-lightbox");
+const lightboxImg = document.getElementById("lightboxImage");
 
-img{
-max-width:100%;
-display:block;
-}
+const closeBtn = document.querySelector(".lightbox-close");
+const lightPrev = document.querySelector(".lightbox-prev");
+const lightNext = document.querySelector(".lightbox-next");
 
-a{
-text-decoration:none;
-}
+const downloadBtn = document.getElementById("downloadBtn");
+const shareBtn = document.getElementById("shareBtn");
 
-.container{
-width:min(1200px,92%);
-margin:auto;
-}
+let index = 0;
+let startX = 0;
+let autoSlide;
 
-/* ================= HEADER ================= */
-
-.header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-z-index:999;
-background:rgba(0,0,0,.88);
-backdrop-filter:blur(10px);
-box-shadow:0 4px 18px rgba(0,0,0,.25);
-}
+slides.forEach((slide,i)=>{
 
-.header .container{
-height:80px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
+const dot=document.createElement("button");
 
-.logo img{
-width:170px;
-}
+dot.className="gallery-dot";
 
-nav{
-display:flex;
-gap:25px;
-}
+if(i===0) dot.classList.add("active");
 
-nav a{
-color:#fff;
-font-size:15px;
-font-weight:600;
-transition:.3s;
-}
+dot.onclick=()=>{
 
-nav a:hover{
-color:#e30613;
-}
+index=i;
 
-.youtube-btn{
-background:#e30613;
-color:#fff;
-padding:12px 22px;
-border-radius:50px;
-font-weight:600;
-transition:.3s;
-}
+updateSlider();
 
-.youtube-btn:hover{
-background:#fff;
-color:#000;
-}
+};
 
-/* ================= HERO ================= */
-
-.hero{
-position:relative;
-min-height: 65vh;
-padding: 80px 20px;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-overflow:hidden;
-background:
-background:#0d0d0d;
-}
+dotsContainer.appendChild(dot);
 
-.hero-overlay{
-position:absolute;
-inset:0;
-background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
-}
+});
 
-.hero-content{
-position:relative;
-z-index:2;
-max-width:900px;
-padding:20px;
-}
+const dots=document.querySelectorAll(".gallery-dot");
 
-.hero h1{
-color:#fff;
-font-size:clamp(42px,6vw,78px);
-font-weight:800;
-margin-bottom:20px;
-}
+function updateSlider(){
 
-.hero p{
-color:#ddd;
-font-size:20px;
-margin-bottom:35px;
-}
+track.style.transform=
+`translateX(-${index*100}%)`;
 
-.hero-buttons{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-}
+dots.forEach(dot=>dot.classList.remove("active"));
 
-/* ================= BUTTONS ================= */
-
-.btn-red,
-.btn-white{
-display:inline-block;
-padding:14px 30px;
-border-radius:50px;
-font-weight:700;
-transition:.3s;
-}
+dots[index].classList.add("active");
 
-.btn-red{
-background:#e30613;
-color:#fff;
 }
 
-.btn-red:hover{
-background:#b8000c;
-}
+function nextSlide(){
 
-.btn-white{
-background:#fff;
-color:#111;
-}
+index++;
 
-.btn-white:hover{
-background:#e30613;
-color:#fff;
-}
+if(index>=slides.length){
 
-/* ================= SECTION ================= */
+index=0;
 
-section{
-padding:90px 0;
 }
 
-.section-heading{
-text-align:center;
-margin-bottom:50px;
-}
+updateSlider();
 
-.section-heading span{
-color:#e30613;
-font-weight:700;
-text-transform:uppercase;
-letter-spacing:2px;
 }
 
-.section-heading h2{
-font-size:42px;
-margin:12px 0;
-}
+function prevSlide(){
 
-.section-heading p{
-color:#666;
-font-size:18px;
-}
+index--;
 
-/* ================= MOBILE ================= */
+if(index<0){
 
-@media(max-width:768px){
+index=slides.length-1;
 
-.header .container{
-height:auto;
-padding:15px 0;
-flex-direction:column;
-gap:15px;
 }
 
-.logo img{
-width:135px;
-}
+updateSlider();
 
-nav{
-flex-wrap:wrap;
-justify-content:center;
-gap:12px;
 }
 
-.hero h1{
-font-size:40px;
-}
+nextBtn.onclick=nextSlide;
 
-.hero p{
-font-size:17px;
-}
+prevBtn.onclick=prevSlide;
 
-.hero-buttons{
-flex-direction:column;
-}
+autoSlide=setInterval(nextSlide,4000);
 
-.btn-red,
-.btn-white{
-width:250px;
-text-align:center;
-}
-}
-/* ==========================================
-PART 4B
-FEATURED VIDEOS + FOLLOW SECTION
-========================================== */
-
-/* Featured Videos */
-
-.featured-videos{
-background:#ffffff;
-}
+track.addEventListener("mouseenter",()=>{
 
-.featured-grid{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:30px;
-align-items:start;
-}
+clearInterval(autoSlide);
 
-.featured-main{
-background:#fff;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
+});
 
-.featured-main iframe{
-width:100%;
-aspect-ratio:16/9;
-border:none;
-display:block;
-}
+track.addEventListener("mouseleave",()=>{
 
-.featured-info{
-padding:25px;
-}
+autoSlide=setInterval(nextSlide,4000);
 
-.featured-info h3{
-font-size:28px;
-margin-bottom:15px;
-}
+});
 
-.featured-info p{
-color:#666;
-margin-bottom:20px;
-}
+slides.forEach((slide,i)=>{
 
-.featured-side{
-display:flex;
-flex-direction:column;
-gap:20px;
-}
+slide.onclick=()=>{
 
-/* Video Cards */
-
-.video-card{
-display:flex;
-gap:15px;
-background:#fff;
-padding:16px;
-border-radius:15px;
-box-shadow:0 8px 22px rgba(0,0,0,.10);
-transition:.3s;
-}
+index=i;
 
-.video-card:hover{
-transform:translateY(-6px);
-box-shadow:0 14px 30px rgba(0,0,0,.18);
-}
+openLightbox();
 
-.video-card img{
-width:110px;
-height:75px;
-object-fit:cover;
-border-radius:10px;
-}
+};
 
-.video-card h3{
-font-size:18px;
-margin-bottom:8px;
-}
+});
+/* ===============================
+   LIGHTBOX FUNCTIONS
+=================================*/
 
-.video-card p{
-font-size:14px;
-color:#666;
-margin-bottom:8px;
-}
+function openLightbox(){
 
-.video-card a{
-color:#e30613;
-font-weight:700;
-}
+    lightbox.classList.add("active");
 
-/* Follow Us */
+    document.body.classList.add("lightbox-open");
 
-.follow-us{
-background:#101010;
-color:#fff;
-}
+    updateLightbox();
 
-.follow-us .section-heading p{
-color:#ccc;
 }
 
-.follow-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:25px;
-}
+function closeLightbox(){
 
-.follow-card{
-text-align:center;
-padding:35px 20px;
-border-radius:18px;
-color:#fff;
-transition:.3s;
-}
+    lightbox.classList.remove("active");
 
-.follow-card h3{
-margin-bottom:12px;
-font-size:24px;
-}
+    document.body.classList.remove("lightbox-open");
 
-.follow-card p{
-color:#eee;
 }
 
-.follow-card.youtube{
-background:#ff0000;
-}
+function updateLightbox(){
 
-.follow-card.instagram{
-background:linear-gradient(45deg,#833ab4,#fd1d1d,#fcb045);
-}
+    const img = slides[index].querySelector("img");
 
-.follow-card.facebook{
-background:#1877f2;
-}
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
 
-.follow-card:hover{
-transform:translateY(-8px);
-box-shadow:0 12px 28px rgba(0,0,0,.30);
+    downloadBtn.href = img.src;
+
 }
 
-/* Tablet */
+function nextImage(){
 
-@media(max-width:900px){
+    index++;
 
-.featured-grid{
-grid-template-columns:1fr;
-}
+    if(index >= slides.length){
 
-.follow-grid{
-grid-template-columns:1fr 1fr;
-}
+        index = 0;
+
+    }
 
+    updateSlider();
+    updateLightbox();
+
 }
 
-/* Mobile */
+function prevImage(){
 
-@media(max-width:600px){
+    index--;
 
-.video-card{
-flex-direction:column;
-}
+    if(index < 0){
 
-.video-card img{
-width:100%;
-height:200px;
-}
+        index = slides.length - 1;
 
-.follow-grid{
-grid-template-columns:1fr;
-}
+    }
 
-.featured-info h3{
-font-size:22px;
-}
+    updateSlider();
+    updateLightbox();
 
-}
-/* ==========================================
-PART 4C
-GALLERY + ABOUT + CONTACT
-==========================================*/
-
-/* ========= GALLERY ========= */
-
-.gallery-section{
-background:#f8f8f8;
 }
 
-.gallery-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:18px;
-}
 
-.gallery-item{
-position:relative;
-overflow:hidden;
-border-radius:16px;
-cursor:pointer;
-background:#fff;
-box-shadow:0 8px 25px rgba(0,0,0,.12);
-}
+/* ===============================
+   BUTTON EVENTS
+=================================*/
 
-.gallery-item img{
-width:100%;
-aspect-ratio:4/3;
-object-fit:cover;
-transition:.4s;
-}
+lightNext.onclick = nextImage;
 
-.gallery-item:hover img{
-transform:scale(1.08);
-}
+lightPrev.onclick = prevImage;
 
-/* ========= ABOUT ========= */
+closeBtn.onclick = closeLightbox;
 
-.about-section{
-background:#ffffff;
-}
 
-.about-box{
-max-width:900px;
-margin:auto;
-background:#fff;
-padding:40px;
-border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,.10);
-text-align:center;
-}
+/* Click outside image */
 
-.about-box h3{
-color:#e30613;
-margin-top:20px;
-margin-bottom:10px;
-font-size:24px;
-}
+lightbox.onclick = function(e){
 
-.about-box p{
-color:#555;
-font-size:17px;
-}
+    if(e.target === lightbox){
 
-/* ========= CONTACT ========= */
+        closeLightbox();
 
-.contact{
-background:#101010;
-color:#fff;
-}
+    }
 
-.contact .section-heading p{
-color:#ccc;
-}
+};
 
-.contact-box{
-max-width:700px;
-margin:auto;
-background:#1b1b1b;
-border-radius:20px;
-padding:40px;
-text-align:center;
-box-shadow:0 10px 35px rgba(0,0,0,.35);
-}
 
-.contact-box p{
-margin:10px 0;
-color:#ddd;
-}
+/* ===============================
+   KEYBOARD
+=================================*/
 
-.social-links{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:15px;
-margin-top:25px;
-}
+document.addEventListener("keydown",function(e){
 
-.social-links a{
-padding:12px 22px;
-background:#e30613;
-color:#fff;
-border-radius:50px;
-font-weight:600;
-transition:.3s;
-}
+    if(!lightbox.classList.contains("active")) return;
 
-.social-links a:hover{
-background:#fff;
-color:#111;
-}
+    if(e.key==="Escape"){
 
-/* ========= MOBILE ========= */
+        closeLightbox();
 
-@media(max-width:900px){
+    }
 
-.gallery-grid{
-grid-template-columns:repeat(3,1fr);
-}
+    if(e.key==="ArrowRight"){
 
-}
+        nextImage();
 
-@media(max-width:700px){
+    }
 
-.gallery-grid{
-grid-template-columns:repeat(2,1fr);
-}
+    if(e.key==="ArrowLeft"){
 
-.about-box,
-.contact-box{
-padding:25px;
-}
+        prevImage();
 
-}
+    }
 
-@media(max-width:480px){
+});
 
-.gallery-grid{
-grid-template-columns:1fr;
-}
 
-.social-links{
-flex-direction:column;
-}
+/* ===============================
+   SHARE
+=================================*/
 
-.social-links a{
-width:100%;
-text-align:center;
-}
+shareBtn.onclick = async function(){
 
-}
-/* ==========================================
-PART 4D
-FOOTER + LIGHTBOX + BACK TO TOP
-==========================================*/
-
-/* ---------- Footer ---------- */
-
-footer{
-background:#050505;
-color:#fff;
-text-align:center;
-padding:60px 20px 35px;
-border-top:4px solid #e30613;
-}
+    if(navigator.share){
 
-footer img{
-width:140px;
-margin:0 auto 20px;
-}
+        try{
 
-footer p{
-color:#bfbfbf;
-margin:8px 0;
-font-size:15px;
-}
+            await navigator.share({
 
-footer a{
-color:#fff;
-}
+                title:"Sangatpura Boyz Entertainment",
 
-/* ---------- Back To Top ---------- */
-
-.back-to-top{
-position:fixed;
-right:20px;
-bottom:20px;
-width:50px;
-height:50px;
-border-radius:50%;
-background:#e30613;
-color:#fff;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:24px;
-z-index:999;
-transition:.3s;
-box-shadow:0 8px 20px rgba(0,0,0,.30);
-}
+                text:"Sangatpura Dhaipai Gallery",
 
-.back-to-top:hover{
-transform:translateY(-5px);
-background:#111;
-}
+                url:lightboxImg.src
 
-/* ---------- Photo Lightbox ---------- */
-
-.photo-lightbox{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.95);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:5000;
-padding:20px;
-}
+            });
 
-.photo-lightbox.active{
-display:flex;
-}
+        }catch(err){}
 
-.lightbox-content{
-max-width:92%;
-max-height:92%;
-text-align:center;
-}
+    }else{
 
-.lightbox-content img{
-max-width:100%;
-max-height:75vh;
-border-radius:12px;
-}
+        try{
 
-.lightbox-actions{
-margin-top:20px;
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-}
+            await navigator.clipboard.writeText(lightboxImg.src);
 
-.lightbox-btn{
-background:#e30613;
-color:#fff;
-padding:12px 20px;
-border-radius:40px;
-font-weight:600;
-border:none;
-cursor:pointer;
-transition:.3s;
-}
+            alert("Photo link copied.");
 
-.lightbox-btn:hover{
-background:#fff;
-color:#111;
-}
+        }catch(err){
 
-.lightbox-close{
-position:absolute;
-top:25px;
-right:30px;
-font-size:42px;
-color:#fff;
-background:none;
-border:none;
-cursor:pointer;
-}
+            alert(lightboxImg.src);
 
-.lightbox-prev,
-.lightbox-next{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-width:60px;
-height:60px;
-border-radius:50%;
-border:none;
-background:rgba(255,255,255,.15);
-color:#fff;
-font-size:34px;
-cursor:pointer;
-transition:.3s;
-}
+        }
 
-.lightbox-prev:hover,
-.lightbox-next:hover{
-background:#e30613;
-}
+    }
 
-.lightbox-prev{
-left:25px;
-}
+};
 
-.lightbox-next{
-right:25px;
-}
 
-/* ---------- Scrollbar ---------- */
+/* ===============================
+   MOBILE SWIPE
+=================================*/
 
-::-webkit-scrollbar{
-width:10px;
-}
+track.addEventListener("touchstart",function(e){
 
-::-webkit-scrollbar-track{
-background:#111;
-}
+    startX = e.touches[0].clientX;
 
-::-webkit-scrollbar-thumb{
-background:#e30613;
-border-radius:20px;
-}
+});
 
-/* ---------- Selection ---------- */
+track.addEventListener("touchend",function(e){
 
-::selection{
-background:#e30613;
-color:#fff;
-}
+    let endX = e.changedTouches[0].clientX;
 
-/* ---------- Mobile ---------- */
+    if(startX-endX>50){
 
-@media(max-width:768px){
+        nextSlide();
 
-.lightbox-prev,
-.lightbox-next{
-width:45px;
-height:45px;
-font-size:24px;
-}
+    }
 
-.lightbox-close{
-top:15px;
-right:15px;
-font-size:34px;
-}
+    if(endX-startX>50){
 
-.back-to-top{
-width:45px;
-height:45px;
-font-size:20px;
-}
+        prevSlide();
 
-footer img{
-width:110px;
-}
+    }
 
-}
+});
 
-.social-buttons{
-display:flex;
-justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-top:25px;
-}
 
-.social-buttons a{
-padding:12px 22px;
-border-radius:40px;
-color:#fff;
-font-weight:bold;
-transition:.3s;
-}
+/* ===============================
+   LIGHTBOX SWIPE
+=================================*/
 
-.youtube-btn{
-background:#ff0000;
-}
+let lightStart=0;
 
-.instagram-btn{
-background:#e1306c;
-}
+lightbox.addEventListener("touchstart",function(e){
 
-.facebook-btn{
-background:#1877f2;
-}
+    lightStart=e.touches[0].clientX;
 
-.social-buttons a:hover{
-transform:translateY(-4px);
-}
+});
+
+lightbox.addEventListener("touchend",function(e){
+
+    let lightEnd=e.changedTouches[0].clientX;
+
+    if(lightStart-lightEnd>50){
+
+        nextImage();
+
+    }
+
+    if(lightEnd-lightStart>50){
+
+        prevImage();
+
+    }
+
+});
+
+
+/* ===============================
+   PRELOAD
+=================================*/
+
+window.onload=function(){
+
+    updateSlider();
+
+};
