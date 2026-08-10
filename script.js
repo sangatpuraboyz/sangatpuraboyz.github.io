@@ -397,3 +397,208 @@ lightbox.addEventListener("touchend",(e)=>{
 });
 
 }
+/* ==========================================================
+   PART 3 - DOWNLOAD • SHARE • LOADER • ANIMATIONS
+========================================================== */
+
+
+/* ---------- DOWNLOAD ---------- */
+
+if(downloadBtn){
+
+    downloadBtn.addEventListener("click",(e)=>{
+
+        e.preventDefault();
+
+        const a=document.createElement("a");
+
+        a.href=lightboxImage.src;
+
+        a.download="Sangatpura-Boyz-Photo";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        document.body.removeChild(a);
+
+    });
+
+}
+
+
+/* ---------- SHARE ---------- */
+
+if(shareBtn){
+
+shareBtn.addEventListener("click",async()=>{
+
+    const url=lightboxImage.src;
+
+    if(navigator.share){
+
+        try{
+
+            await navigator.share({
+
+                title:"Sangatpura Boyz Entertainment",
+
+                text:"Sangatpura Gallery",
+
+                url:url
+
+            });
+
+        }catch(e){}
+
+    }else{
+
+        try{
+
+            await navigator.clipboard.writeText(url);
+
+            alert("Photo link copied.");
+
+        }catch(e){
+
+            prompt("Copy Photo URL",url);
+
+        }
+
+    }
+
+});
+
+}
+
+
+/* ---------- PAGE LOADER ---------- */
+
+window.addEventListener("load",()=>{
+
+    const loader=document.getElementById("loader");
+
+    if(loader){
+
+        setTimeout(()=>{
+
+            loader.classList.add("hide");
+
+        },700);
+
+    }
+
+});
+
+
+/* ---------- FADE ANIMATION ---------- */
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+    if(entry.isIntersecting){
+
+        entry.target.classList.add("show");
+
+    }
+
+});
+
+},{
+threshold:0.20
+});
+
+
+document.querySelectorAll(
+
+".section-heading,.big-card,.side-card,.about-box,.gallery-slider,.social-btn,.contact-box"
+
+).forEach(el=>{
+
+    el.classList.add("fade-up");
+
+    observer.observe(el);
+
+});
+
+
+/* ---------- HERO TITLE ---------- */
+
+const heroTitle=document.querySelector(".hero h1");
+
+if(heroTitle){
+
+heroTitle.animate([
+
+{
+
+opacity:0,
+
+transform:"translateY(40px)"
+
+},
+
+{
+
+opacity:1,
+
+transform:"translateY(0)"
+
+}
+
+],{
+
+duration:1200,
+
+fill:"forwards"
+
+});
+
+}
+
+
+/* ---------- HERO LOGO ---------- */
+
+const heroLogo=document.querySelector(".hero-logo");
+
+if(heroLogo){
+
+heroLogo.animate([
+
+{
+
+transform:"translateY(0px)"
+
+},
+
+{
+
+transform:"translateY(-10px)"
+
+},
+
+{
+
+transform:"translateY(0px)"
+
+}
+
+],{
+
+duration:3500,
+
+iterations:Infinity
+
+});
+
+}
+
+
+/* ---------- IMAGE DRAG OFF ---------- */
+
+document.querySelectorAll("img").forEach(img=>{
+
+    img.setAttribute("draggable","false");
+
+});
