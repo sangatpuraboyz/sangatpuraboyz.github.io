@@ -518,3 +518,154 @@ border-radius:20px;
 background:#ff2b3b;
 
 }
+/* =====================================
+   PART 5B - PREMIUM EFFECTS
+=====================================*/
+
+/* Loader */
+
+window.addEventListener("load",()=>{
+
+const loader=document.getElementById("loader");
+
+if(loader){
+
+setTimeout(()=>{
+
+loader.classList.add("hide");
+
+},700);
+
+}
+
+});
+
+
+/* Fade Up Animation */
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},{
+threshold:.15
+});
+
+document.querySelectorAll(
+".section-heading,.about-box,.big-card,.side-card,.contact-box,.gallery-slider,.social-btn"
+).forEach(el=>{
+
+el.classList.add("fade-up");
+
+observer.observe(el);
+
+});
+
+
+/* Active Navigation */
+
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll("nav a");
+
+window.addEventListener("scroll",()=>{
+
+let current="";
+
+sections.forEach(section=>{
+
+const top=section.offsetTop-120;
+
+if(pageYOffset>=top){
+
+current=section.getAttribute("id");
+
+}
+
+});
+
+navLinks.forEach(link=>{
+
+link.classList.remove("active");
+
+if(link.getAttribute("href")==="#"+current){
+
+link.classList.add("active");
+
+}
+
+});
+
+});
+
+
+/* Smooth Scroll */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+
+anchor.addEventListener("click",function(e){
+
+e.preventDefault();
+
+document.querySelector(this.getAttribute("href")).scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+});
+
+});
+
+
+/* Back To Top */
+
+const backTop=document.querySelector(".back-to-top");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>400){
+
+backTop.style.opacity="1";
+
+backTop.style.pointerEvents="auto";
+
+}else{
+
+backTop.style.opacity="0";
+
+backTop.style.pointerEvents="none";
+
+}
+
+});
+
+
+/* Hero Text Animation */
+
+const heroTitle=document.querySelector(".hero h1");
+
+if(heroTitle){
+
+heroTitle.animate([
+
+{opacity:0,transform:"translateY(40px)"},
+
+{opacity:1,transform:"translateY(0)"}
+
+],{
+
+duration:1200,
+
+fill:"forwards"
+
+});
+
+}
