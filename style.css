@@ -1,8 +1,3 @@
-/* ===========================================
-SANGATPURA BOYZ ENTERTAINMENT
-Professional Gallery Script
-=========================================== */
-
 const track = document.querySelector(".gallery-track");
 const slides = document.querySelectorAll(".gallery-slide");
 const nextBtn = document.querySelector(".gallery-next");
