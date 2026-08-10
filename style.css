@@ -1188,3 +1188,30 @@ border:none;
 background:#000;
 color:#fff;
 }
+
+<div class="card">
+
+    <div class="youtube-box">
+
+        <a
+            href="https://www.instagram.com/reel/DQLpXnXk9Lr/"
+            target="_blank"
+            class="btn">
+
+            Watch Instagram Reel
+
+        </a>
+
+    </div>
+
+    <div class="card-content">
+
+        <h3>Instagram Reel</h3>
+
+        <p>
+            Watch our latest Instagram Reel.
+        </p>
+
+    </div>
+
+</div>
