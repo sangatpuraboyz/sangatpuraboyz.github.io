@@ -602,3 +602,180 @@ document.querySelectorAll("img").forEach(img=>{
     img.setAttribute("draggable","false");
 
 });
+/* ==========================================================
+   PART 4 - FINAL
+========================================================== */
+
+
+/* ---------- ACTIVE NAVIGATION ---------- */
+
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll("nav a");
+
+window.addEventListener("scroll",()=>{
+
+    let current="";
+
+    sections.forEach(section=>{
+
+        const top=section.offsetTop-120;
+
+        if(window.scrollY>=top){
+
+            current=section.id;
+
+        }
+
+    });
+
+    navLinks.forEach(link=>{
+
+        link.classList.remove("active");
+
+        if(link.getAttribute("href")==="#"+current){
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+});
+
+
+/* ---------- SMOOTH SCROLL ---------- */
+
+navLinks.forEach(link=>{
+
+    link.addEventListener("click",function(e){
+
+        const id=this.getAttribute("href");
+
+        if(id.startsWith("#")){
+
+            const target=document.querySelector(id);
+
+            if(target){
+
+                e.preventDefault();
+
+                target.scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        }
+
+    });
+
+});
+
+
+/* ---------- BACK TO TOP ---------- */
+
+const backTop=document.querySelector(".back-to-top");
+
+if(backTop){
+
+    backTop.style.opacity="0";
+
+    backTop.style.pointerEvents="none";
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY>400){
+
+            backTop.style.opacity="1";
+
+            backTop.style.pointerEvents="auto";
+
+        }else{
+
+            backTop.style.opacity="0";
+
+            backTop.style.pointerEvents="none";
+
+        }
+
+    });
+
+}
+
+
+/* ---------- MOBILE MENU ---------- */
+
+const menuBtn=document.querySelector(".menu-btn");
+const nav=document.querySelector("nav");
+
+if(menuBtn && nav){
+
+    menuBtn.addEventListener("click",()=>{
+
+        nav.classList.toggle("show");
+
+    });
+
+}
+
+
+/* ---------- CLOSE MENU AFTER CLICK ---------- */
+
+navLinks.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        if(nav){
+
+            nav.classList.remove("show");
+
+        }
+
+    });
+
+});
+
+
+/* ---------- STOP AUTO SLIDER ON HOVER ---------- */
+
+if(track){
+
+    track.addEventListener("mouseenter",()=>{
+
+        clearInterval(autoSlider);
+
+    });
+
+    track.addEventListener("mouseleave",()=>{
+
+        autoSlider=setInterval(nextSlide,4000);
+
+    });
+
+}
+
+
+/* ---------- START AUTO SLIDER ---------- */
+
+if(track && slides.length){
+
+    autoSlider=setInterval(nextSlide,4000);
+
+}
+
+
+/* ---------- INITIALIZE ---------- */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    if(typeof updateSlider==="function"){
+
+        updateSlider();
+
+    }
+
+    console.log("Sangatpura Boyz Entertainment Loaded Successfully");
+
+});
