@@ -102,9 +102,7 @@ align-items:center;
 text-align:center;
 overflow:hidden;
 background:
-linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
-url("logo.png") center/320px no-repeat,
-#111;
+background:#0d0d0d;
 }
 
 .hero-overlay{
