@@ -1215,3 +1215,34 @@ color:#fff;
     </div>
 
 </div>
+.featured{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    padding:70px 5%;
+    background:#fff;
+}
+
+.featured-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+    transition:.3s;
+    border-top:5px solid #e30613;
+}
+
+.featured-card:hover{
+    transform:translateY(-8px);
+}
+
+.featured-card h2{
+    margin-bottom:15px;
+    color:#111;
+}
+
+.featured-card p{
+    margin-bottom:20px;
+    color:#555;
+}
