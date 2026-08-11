@@ -636,3 +636,13 @@ grid-template-columns:1fr;
 }
 
 }
+.fade{
+opacity:0;
+transform:translateY(35px);
+transition:.8s ease;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
