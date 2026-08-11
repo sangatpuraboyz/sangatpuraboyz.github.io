@@ -1,8 +1,7 @@
-/* ==========================================================
-   SANGATPURA BOYZ ENTERTAINMENT
-   SCRIPT.JS
-   PART 1 - GALLERY SLIDER
-========================================================== */
+/*==========================================
+SCRIPT.JS - PART 5A
+Gallery + Navigation + Loader
+==========================================*/
 
 const track = document.querySelector(".gallery-track");
 const slides = document.querySelectorAll(".gallery-slide");
@@ -10,772 +9,281 @@ const prevBtn = document.querySelector(".gallery-prev");
 const nextBtn = document.querySelector(".gallery-next");
 const dotsContainer = document.querySelector(".gallery-dots");
 
-let currentSlide = 0;
-let autoSlide = null;
-let startX = 0;
+let current = 0;
+let autoSlider;
 
-/* ---------- UPDATE SLIDER ---------- */
-
-function updateSlider(){
-
-    if(!track || slides.length===0) return;
-
-    track.style.transform =
-    `translateX(-${currentSlide * 100}%)`;
-
-    const dots =
-    document.querySelectorAll(".gallery-dot");
-
-    dots.forEach(dot=>dot.classList.remove("active"));
-
-    if(dots[currentSlide]){
-        dots[currentSlide].classList.add("active");
-    }
-
-}
-
-/* ---------- NEXT ---------- */
-
-function nextSlide(){
-
-    currentSlide++;
-
-    if(currentSlide >= slides.length){
-
-        currentSlide = 0;
-
-    }
-
-    updateSlider();
-
-}
-
-/* ---------- PREVIOUS ---------- */
-
-function prevSlide(){
-
-    currentSlide--;
-
-    if(currentSlide < 0){
-
-        currentSlide = slides.length - 1;
-
-    }
-
-    updateSlider();
-
-}
-
-/* ---------- CREATE DOTS ---------- */
-
-if(track && slides.length){
-
-    slides.forEach((slide,index)=>{
-
-        const dot =
-        document.createElement("button");
-
-        dot.className = "gallery-dot";
-
-        if(index===0){
-            dot.classList.add("active");
-        }
-
-        dot.addEventListener("click",()=>{
-
-            currentSlide=index;
-
-            updateSlider();
-
-        });
-
-        if(dotsContainer){
-
-            dotsContainer.appendChild(dot);
-
-        }
-
-    });
-
-}
-
-/* ---------- BUTTONS ---------- */
-
-if(nextBtn){
-
-    nextBtn.addEventListener("click",nextSlide);
-
-}
-
-if(prevBtn){
-
-    prevBtn.addEventListener("click",prevSlide);
-
-}
-
-/* ---------- AUTO SLIDE ---------- */
-
-function startAutoSlide(){
-
-    stopAutoSlide();
-
-    autoSlide =
-    setInterval(nextSlide,4000);
-
-}
-
-function stopAutoSlide(){
-
-    if(autoSlide){
-
-        clearInterval(autoSlide);
-
-    }
-
-}
-
-if(track){
-
-    startAutoSlide();
-
-    track.addEventListener(
-        "mouseenter",
-        stopAutoSlide
-    );
-
-    track.addEventListener(
-        "mouseleave",
-        startAutoSlide
-    );
-
-}
-
-/* ---------- MOBILE SWIPE ---------- */
-
-if(track){
-
-track.addEventListener("touchstart",(e)=>{
-
-    startX=e.touches[0].clientX;
-
-});
-
-track.addEventListener("touchend",(e)=>{
-
-    const endX=
-    e.changedTouches[0].clientX;
-
-    if(startX-endX>50){
-
-        nextSlide();
-
-    }
-
-    if(endX-startX>50){
-
-        prevSlide();
-
-    }
-
-});
-
-}
-
-/* ---------- START ---------- */
-
-updateSlider();
-/* ==========================================================
-   PART 2 - LIGHTBOX
-========================================================== */
-
-const lightbox = document.querySelector(".photo-lightbox");
-const lightboxImage = document.getElementById("lightboxImage");
-
-const lightPrev = document.querySelector(".lightbox-prev");
-const lightNext = document.querySelector(".lightbox-next");
-const lightClose = document.querySelector(".lightbox-close");
-
-const downloadBtn = document.getElementById("downloadBtn");
-const shareBtn = document.getElementById("shareBtn");
-
-
-/* ---------- OPEN ---------- */
-
-function openLightbox(){
-
-    if(!lightbox || slides.length===0) return;
-
-    const img = slides[currentSlide].querySelector("img");
-
-    if(!img) return;
-
-    lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt;
-
-    if(downloadBtn){
-
-        downloadBtn.href = img.src;
-        downloadBtn.download = img.alt || "photo";
-
-    }
-
-    lightbox.classList.add("active");
-
-    document.body.classList.add("lightbox-open");
-
-}
-
-
-/* ---------- CLOSE ---------- */
-
-function closeLightbox(){
-
-    if(!lightbox) return;
-
-    lightbox.classList.remove("active");
-
-    document.body.classList.remove("lightbox-open");
-
-}
-
-
-/* ---------- UPDATE ---------- */
-
-function updateLightbox(){
-
-    if(!lightbox.classList.contains("active")) return;
-
-    const img = slides[currentSlide].querySelector("img");
-
-    if(!img) return;
-
-    lightboxImage.src = img.src;
-    lightboxImage.alt = img.alt;
-
-    if(downloadBtn){
-
-        downloadBtn.href = img.src;
-
-    }
-
-}
-
-
-/* ---------- CLICK IMAGE ---------- */
+/* ---------- Create Dots ---------- */
 
 slides.forEach((slide,index)=>{
 
-    slide.addEventListener("click",()=>{
+const dot=document.createElement("button");
 
-        currentSlide=index;
+dot.className="gallery-dot";
 
-        updateSlider();
+if(index===0) dot.classList.add("active");
 
-        openLightbox();
+dot.onclick=()=>{
 
-    });
+current=index;
+
+updateSlider();
+
+};
+
+dotsContainer.appendChild(dot);
 
 });
 
+/* ---------- Update ---------- */
 
-/* ---------- NEXT ---------- */
+function updateSlider(){
 
-function nextImage(){
+track.style.transform=`translateX(-${current*100}%)`;
 
-    nextSlide();
+document.querySelectorAll(".gallery-dot").forEach((dot,i)=>{
 
-    updateLightbox();
-
-}
-
-
-/* ---------- PREVIOUS ---------- */
-
-function prevImage(){
-
-    prevSlide();
-
-    updateLightbox();
-
-}
-
-
-/* ---------- BUTTONS ---------- */
-
-if(lightNext){
-
-    lightNext.addEventListener("click",nextImage);
-
-}
-
-if(lightPrev){
-
-    lightPrev.addEventListener("click",prevImage);
-
-}
-
-if(lightClose){
-
-    lightClose.addEventListener("click",closeLightbox);
-
-}
-
-
-/* ---------- OUTSIDE CLICK ---------- */
-
-if(lightbox){
-
-lightbox.addEventListener("click",(e)=>{
-
-    if(e.target===lightbox){
-
-        closeLightbox();
-
-    }
+dot.classList.toggle("active",i===current);
 
 });
 
 }
 
+/* ---------- Next ---------- */
 
-/* ---------- KEYBOARD ---------- */
+function nextSlide(){
 
-document.addEventListener("keydown",(e)=>{
+current=(current+1)%slides.length;
 
-    if(!lightbox ||
-       !lightbox.classList.contains("active")) return;
-
-    if(e.key==="Escape"){
-
-        closeLightbox();
-
-    }
-
-    if(e.key==="ArrowRight"){
-
-        nextImage();
-
-    }
-
-    if(e.key==="ArrowLeft"){
-
-        prevImage();
-
-    }
-
-});
-
-
-/* ---------- MOBILE SWIPE ---------- */
-
-let lightStartX = 0;
-
-if(lightbox){
-
-lightbox.addEventListener("touchstart",(e)=>{
-
-    lightStartX = e.touches[0].clientX;
-
-});
-
-lightbox.addEventListener("touchend",(e)=>{
-
-    let lightEndX = e.changedTouches[0].clientX;
-
-    if(lightStartX-lightEndX>50){
-
-        nextImage();
-
-    }
-
-    if(lightEndX-lightStartX>50){
-
-        prevImage();
-
-    }
-
-});
-
-}
-/* ==========================================================
-   PART 3 - DOWNLOAD • SHARE • LOADER • ANIMATIONS
-========================================================== */
-
-
-/* ---------- DOWNLOAD ---------- */
-
-if(downloadBtn){
-
-    downloadBtn.addEventListener("click",(e)=>{
-
-        e.preventDefault();
-
-        const a=document.createElement("a");
-
-        a.href=lightboxImage.src;
-
-        a.download="Sangatpura-Boyz-Photo";
-
-        document.body.appendChild(a);
-
-        a.click();
-
-        document.body.removeChild(a);
-
-    });
+updateSlider();
 
 }
 
+/* ---------- Previous ---------- */
 
-/* ---------- SHARE ---------- */
+function prevSlide(){
 
-if(shareBtn){
+current=(current-1+slides.length)%slides.length;
 
-shareBtn.addEventListener("click",async()=>{
-
-    const url=lightboxImage.src;
-
-    if(navigator.share){
-
-        try{
-
-            await navigator.share({
-
-                title:"Sangatpura Boyz Entertainment",
-
-                text:"Sangatpura Gallery",
-
-                url:url
-
-            });
-
-        }catch(e){}
-
-    }else{
-
-        try{
-
-            await navigator.clipboard.writeText(url);
-
-            alert("Photo link copied.");
-
-        }catch(e){
-
-            prompt("Copy Photo URL",url);
-
-        }
-
-    }
-
-});
+updateSlider();
 
 }
 
+nextBtn?.addEventListener("click",nextSlide);
+prevBtn?.addEventListener("click",prevSlide);
 
-/* ---------- PAGE LOADER ---------- */
+/* ---------- Auto Slider ---------- */
+
+function startSlider(){
+
+autoSlider=setInterval(nextSlide,4000);
+
+}
+
+function stopSlider(){
+
+clearInterval(autoSlider);
+
+}
+
+track?.addEventListener("mouseenter",stopSlider);
+track?.addEventListener("mouseleave",startSlider);
+
+startSlider();
+
+/* ---------- Mobile Swipe ---------- */
+
+let startX=0;
+
+track?.addEventListener("touchstart",(e)=>{
+
+startX=e.touches[0].clientX;
+
+});
+
+track?.addEventListener("touchend",(e)=>{
+
+const endX=e.changedTouches[0].clientX;
+
+if(startX-endX>50) nextSlide();
+
+if(endX-startX>50) prevSlide();
+
+});
+
+/* ---------- Loader ---------- */
 
 window.addEventListener("load",()=>{
 
-    const loader=document.getElementById("loader");
-
-    if(loader){
-
-        setTimeout(()=>{
-
-            loader.classList.add("hide");
-
-        },700);
-
-    }
+document.getElementById("loader")?.classList.add("hide");
 
 });
 
+/* ---------- Mobile Menu ---------- */
 
-/* ---------- FADE ANIMATION ---------- */
+const menu=document.querySelector(".menu-btn");
+const nav=document.querySelector("nav");
 
-const observer=new IntersectionObserver((entries)=>{
+menu?.addEventListener("click",()=>{
 
-entries.forEach(entry=>{
+nav.classList.toggle("show");
 
-    if(entry.isIntersecting){
+});
+/*==========================================
+SCRIPT.JS - PART 5B
+Lightbox + Back To Top + Scroll Effects
+==========================================*/
 
-        entry.target.classList.add("show");
+/* ---------- LIGHTBOX ---------- */
 
-    }
+const lightbox = document.querySelector(".photo-lightbox");
+const lightboxImg = document.getElementById("lightboxImage");
+
+document.querySelectorAll(".gallery-slide img").forEach((img,index)=>{
+
+img.addEventListener("click",()=>{
+
+current=index;
+
+updateSlider();
+
+lightboxImg.src=img.src;
+lightboxImg.alt=img.alt;
+
+lightbox.classList.add("active");
 
 });
 
-},{
-threshold:0.20
 });
 
+document.querySelector(".lightbox-close")?.addEventListener("click",()=>{
 
-document.querySelectorAll(
-
-".section-heading,.big-card,.side-card,.about-box,.gallery-slider,.social-btn,.contact-box"
-
-).forEach(el=>{
-
-    el.classList.add("fade-up");
-
-    observer.observe(el);
+lightbox.classList.remove("active");
 
 });
 
+document.querySelector(".lightbox-next")?.addEventListener("click",()=>{
 
-/* ---------- HERO TITLE ---------- */
+nextSlide();
 
-const heroTitle=document.querySelector(".hero h1");
+const img=slides[current].querySelector("img");
 
-if(heroTitle){
+lightboxImg.src=img.src;
+lightboxImg.alt=img.alt;
 
-heroTitle.animate([
+});
 
-{
+document.querySelector(".lightbox-prev")?.addEventListener("click",()=>{
 
-opacity:0,
+prevSlide();
 
-transform:"translateY(40px)"
+const img=slides[current].querySelector("img");
 
-},
+lightboxImg.src=img.src;
+lightboxImg.alt=img.alt;
 
-{
+});
 
-opacity:1,
+/* ---------- BACK TO TOP ---------- */
 
-transform:"translateY(0)"
+const backTop=document.querySelector(".back-to-top");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>400){
+
+backTop.style.opacity="1";
+backTop.style.pointerEvents="auto";
+
+}else{
+
+backTop.style.opacity="0";
+backTop.style.pointerEvents="none";
 
 }
 
-],{
-
-duration:1200,
-
-fill:"forwards"
-
 });
 
-}
-
-
-/* ---------- HERO LOGO ---------- */
-
-const heroLogo=document.querySelector(".hero-logo");
-
-if(heroLogo){
-
-heroLogo.animate([
-
-{
-
-transform:"translateY(0px)"
-
-},
-
-{
-
-transform:"translateY(-10px)"
-
-},
-
-{
-
-transform:"translateY(0px)"
-
-}
-
-],{
-
-duration:3500,
-
-iterations:Infinity
-
-});
-
-}
-
-
-/* ---------- IMAGE DRAG OFF ---------- */
-
-document.querySelectorAll("img").forEach(img=>{
-
-    img.setAttribute("draggable","false");
-
-});
-/* ==========================================================
-   PART 4 - FINAL
-========================================================== */
-
-
-/* ---------- ACTIVE NAVIGATION ---------- */
+/* ---------- ACTIVE NAV ---------- */
 
 const sections=document.querySelectorAll("section");
 const navLinks=document.querySelectorAll("nav a");
 
 window.addEventListener("scroll",()=>{
 
-    let current="";
+let currentSection="";
 
-    sections.forEach(section=>{
+sections.forEach(section=>{
 
-        const top=section.offsetTop-120;
+if(window.scrollY>=section.offsetTop-150){
 
-        if(window.scrollY>=top){
+currentSection=section.id;
 
-            current=section.id;
-
-        }
-
-    });
-
-    navLinks.forEach(link=>{
-
-        link.classList.remove("active");
-
-        if(link.getAttribute("href")==="#"+current){
-
-            link.classList.add("active");
-
-        }
-
-    });
+}
 
 });
-
-
-/* ---------- SMOOTH SCROLL ---------- */
 
 navLinks.forEach(link=>{
 
-    link.addEventListener("click",function(e){
+link.classList.remove("active");
 
-        const id=this.getAttribute("href");
+if(link.getAttribute("href")==="#"+currentSection){
 
-        if(id.startsWith("#")){
+link.classList.add("active");
 
-            const target=document.querySelector(id);
-
-            if(target){
-
-                e.preventDefault();
-
-                target.scrollIntoView({
-
-                    behavior:"smooth"
-
-                });
-
-            }
-
-        }
-
-    });
+}
 
 });
 
+});
 
-/* ---------- BACK TO TOP ---------- */
+/* ---------- FADE ---------- */
 
-const backTop=document.querySelector(".back-to-top");
+const observer=new IntersectionObserver(entries=>{
 
-if(backTop){
+entries.forEach(entry=>{
 
-    backTop.style.opacity="0";
+if(entry.isIntersecting){
 
-    backTop.style.pointerEvents="none";
-
-    window.addEventListener("scroll",()=>{
-
-        if(window.scrollY>400){
-
-            backTop.style.opacity="1";
-
-            backTop.style.pointerEvents="auto";
-
-        }else{
-
-            backTop.style.opacity="0";
-
-            backTop.style.pointerEvents="none";
-
-        }
-
-    });
+entry.target.classList.add("show");
 
 }
 
+});
 
-/* ---------- MOBILE MENU ---------- */
+},{threshold:0.2});
 
-const menuBtn=document.querySelector(".menu-btn");
-const nav=document.querySelector("nav");
+document.querySelectorAll(
 
-if(menuBtn && nav){
+".section-heading,.video-card,.about-box,.gallery-slider,.contact-box"
 
-    menuBtn.addEventListener("click",()=>{
+).forEach(el=>{
 
-        nav.classList.toggle("show");
+el.classList.add("fade-up");
 
-    });
+observer.observe(el);
 
-}
+});
 
+/* ---------- DISABLE IMAGE DRAG ---------- */
 
-/* ---------- CLOSE MENU AFTER CLICK ---------- */
+document.querySelectorAll("img").forEach(img=>{
+
+img.draggable=false;
+
+});
+
+/* ---------- CLOSE MENU ---------- */
 
 navLinks.forEach(link=>{
 
-    link.addEventListener("click",()=>{
+link.addEventListener("click",()=>{
 
-        if(nav){
-
-            nav.classList.remove("show");
-
-        }
-
-    });
+nav?.classList.remove("show");
 
 });
 
-
-/* ---------- STOP AUTO SLIDER ON HOVER ---------- */
-
-if(track){
-
-    track.addEventListener("mouseenter",()=>{
-
-        clearInterval(autoSlider);
-
-    });
-
-    track.addEventListener("mouseleave",()=>{
-
-        autoSlider=setInterval(nextSlide,4000);
-
-    });
-
-}
-
-
-/* ---------- START AUTO SLIDER ---------- */
-
-if(track && slides.length){
-
-    autoSlider=setInterval(nextSlide,4000);
-
-}
-
-
-/* ---------- INITIALIZE ---------- */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    if(typeof updateSlider==="function"){
-
-        updateSlider();
-
-    }
-
-    console.log("Sangatpura Boyz Entertainment Loaded Successfully");
-
 });
+
+/* ---------- READY ---------- */
+
+console.log("Sangatpura Boyz Entertainment Loaded");
