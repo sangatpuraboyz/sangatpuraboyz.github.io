@@ -1,243 +1,160 @@
-/*==========================================
-SANGATPURA BOYZ ENTERTAINMENT
-SCRIPT.JS
-PART 1
-==========================================*/
+// ===============================
+// SANGATPURA BOYZ ENTERTAINMENT
+// PREMIUM SCRIPT.JS
+// ===============================
 
-/*==========================
-MOBILE MENU
-==========================*/
+// ---------- LOADER ----------
+
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => {
+            loader.style.display = "none";
+        }, 500);
+    }
+});
+
+// ---------- MOBILE MENU ----------
 
 const menuBtn = document.getElementById("menu-btn");
 const menu = document.getElementById("menu");
 
-menuBtn.addEventListener("click", () => {
-    menu.classList.toggle("active");
+if (menuBtn && menu) {
+
+    menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("show");
+    });
+
+    document.querySelectorAll("#menu a").forEach(link => {
+        link.addEventListener("click", () => {
+            menu.classList.remove("show");
+        });
+    });
+
+}
+
+// ---------- BACK TO TOP ----------
+
+const backTop = document.querySelector(".back-top");
+
+window.addEventListener("scroll", () => {
+
+    if (!backTop) return;
+
+    if (window.scrollY > 400) {
+
+        backTop.style.opacity = "1";
+        backTop.style.pointerEvents = "auto";
+
+    } else {
+
+        backTop.style.opacity = "0";
+        backTop.style.pointerEvents = "none";
+
+    }
+
 });
 
-/*==========================
-SMOOTH SCROLL
-==========================*/
+// ---------- GALLERY LIGHTBOX ----------
 
-document.querySelectorAll('nav a').forEach(link => {
+const images = document.querySelectorAll(".gallery-img");
+const lightbox = document.querySelector(".lightbox");
+const lightImg = document.querySelector(".lightbox-img");
+const closeBtn = document.querySelector(".close");
 
-    link.addEventListener("click", function(e){
+images.forEach(img => {
 
-        e.preventDefault();
+    img.addEventListener("click", () => {
 
-        const target = document.querySelector(this.getAttribute("href"));
+        lightbox.classList.add("active");
 
-        if(target){
-
-            target.scrollIntoView({
-                behavior:"smooth"
-            });
-
-        }
-
-        menu.classList.remove("active");
+        lightImg.src = img.src;
 
     });
 
 });
 
-/*==========================
-BACK TO TOP
-==========================*/
+if (closeBtn) {
 
-const topBtn=document.querySelector(".top-btn");
+    closeBtn.addEventListener("click", () => {
 
-window.addEventListener("scroll",()=>{
+        lightbox.classList.remove("active");
 
-if(window.scrollY>300){
-
-topBtn.style.opacity="1";
-topBtn.style.visibility="visible";
-
-}else{
-
-topBtn.style.opacity="0";
-topBtn.style.visibility="hidden";
+    });
 
 }
 
-});
+if (lightbox) {
 
-/*==========================
-LIGHTBOX
-==========================*/
+    lightbox.addEventListener("click", (e) => {
 
-const galleryImages=document.querySelectorAll(".gallery-img");
+        if (e.target === lightbox) {
 
-const lightbox=document.getElementById("lightbox");
+            lightbox.classList.remove("active");
 
-const lightboxImg=document.getElementById("lightbox-img");
+        }
 
-const closeBtn=document.getElementById("close-photo");
-
-galleryImages.forEach(img=>{
-
-img.addEventListener("click",()=>{
-
-lightbox.classList.add("active");
-
-lightboxImg.src=img.src;
-
-document.body.style.overflow="hidden";
-
-});
-
-});
-
-closeBtn.addEventListener("click",()=>{
-
-lightbox.classList.remove("active");
-
-document.body.style.overflow="auto";
-
-});
-
-lightbox.addEventListener("click",(e)=>{
-
-if(e.target===lightbox){
-
-lightbox.classList.remove("active");
-
-document.body.style.overflow="auto";
+    });
 
 }
 
-});
-/*==========================================
-SCRIPT.JS
-PART 2
-FINAL
-==========================================*/
+// ---------- ESC CLOSE ----------
 
-/*==========================
-FADE ANIMATION
-==========================*/
+document.addEventListener("keydown", (e) => {
 
-const observer = new IntersectionObserver((entries)=>{
+    if (e.key === "Escape") {
 
-entries.forEach(entry=>{
+        lightbox.classList.remove("active");
 
-if(entry.isIntersecting){
-
-entry.target.classList.add("show");
-
-}
+    }
 
 });
 
-},{
-threshold:0.15
+// ---------- FADE ANIMATION ----------
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+}, {
+    threshold: 0.15
 });
 
-document.querySelectorAll("section,.video-card,.gallery-img,.contact-card,.about-box").forEach(el=>{
+document.querySelectorAll("section,.video-card,.about-card,.contact-card").forEach(el => {
 
-el.classList.add("fade");
+    el.classList.add("fade");
 
-observer.observe(el);
-
-});
-
-
-/*==========================
-IMAGE LAZY LOAD
-==========================*/
-
-document.querySelectorAll("img").forEach(img=>{
-
-img.loading="lazy";
-img.decoding="async";
-
-});
-
-
-/*==========================
-VIDEO LAZY LOAD
-==========================*/
-
-document.querySelectorAll("iframe").forEach(frame=>{
-
-frame.loading="lazy";
+    observer.observe(el);
 
 });
 
+// ---------- HEADER SHADOW ----------
 
-/*==========================
-HEADER SHADOW
-==========================*/
+window.addEventListener("scroll", () => {
 
-const header=document.querySelector("header");
+    const header = document.querySelector("header");
 
-window.addEventListener("scroll",()=>{
+    if (!header) return;
 
-if(window.scrollY>30){
+    if (window.scrollY > 80) {
 
-header.style.boxShadow="0 10px 25px rgba(0,0,0,.25)";
+        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
 
-}else{
+    } else {
 
-header.style.boxShadow="none";
+        header.style.boxShadow = "none";
 
-}
-
-});
-
-
-/*==========================
-PRELOAD HERO VIDEO
-==========================*/
-
-const heroVideo=document.querySelector(".hero video");
-
-if(heroVideo){
-
-heroVideo.preload="metadata";
-
-heroVideo.playsInline=true;
-
-}
-
-
-/*==========================
-DISABLE IMAGE DRAG
-==========================*/
-
-document.querySelectorAll("img").forEach(img=>{
-
-img.draggable=false;
+    }
 
 });
-
-
-/*==========================
-KEYBOARD CLOSE
-==========================*/
-
-document.addEventListener("keydown",(e)=>{
-
-if(e.key==="Escape"){
-
-lightbox.classList.remove("active");
-
-document.body.style.overflow="auto";
-
-}
-
-});
-
-
-/*==========================
-PAGE LOADED
-==========================*/
-
-window.addEventListener("load",()=>{
-
-document.body.classList.add("loaded");
 
 console.log("Sangatpura Boyz Entertainment Loaded Successfully");
-
-});
