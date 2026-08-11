@@ -1,9 +1,6 @@
-// ===============================
-// SANGATPURA BOYZ ENTERTAINMENT
-// PREMIUM SCRIPT.JS
-// ===============================
-
-// ---------- LOADER ----------
+// ======================
+// LOADER
+// ======================
 
 window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
@@ -15,13 +12,14 @@ window.addEventListener("load", () => {
     }
 });
 
-// ---------- MOBILE MENU ----------
+// ======================
+// MOBILE MENU
+// ======================
 
 const menuBtn = document.getElementById("menu-btn");
 const menu = document.getElementById("menu");
 
 if (menuBtn && menu) {
-
     menuBtn.addEventListener("click", () => {
         menu.classList.toggle("show");
     });
@@ -31,129 +29,186 @@ if (menuBtn && menu) {
             menu.classList.remove("show");
         });
     });
-
 }
 
-// ---------- BACK TO TOP ----------
+// ======================
+// BACK TO TOP
+// ======================
 
-const backTop = document.querySelector(".back-top");
+const topBtn = document.getElementById("topBtn");
 
 window.addEventListener("scroll", () => {
 
-    if (!backTop) return;
-
-    if (window.scrollY > 400) {
-
-        backTop.style.opacity = "1";
-        backTop.style.pointerEvents = "auto";
-
+    if (window.scrollY > 300) {
+        topBtn.style.display = "block";
     } else {
-
-        backTop.style.opacity = "0";
-        backTop.style.pointerEvents = "none";
-
+        topBtn.style.display = "none";
     }
 
 });
 
-// ---------- GALLERY LIGHTBOX ----------
+topBtn.addEventListener("click", () => {
 
-const images = document.querySelectorAll(".gallery-img");
-const lightbox = document.querySelector(".lightbox");
-const lightImg = document.querySelector(".lightbox-img");
-const closeBtn = document.querySelector(".close");
-
-images.forEach(img => {
-
-    img.addEventListener("click", () => {
-
-        lightbox.classList.add("active");
-
-        lightImg.src = img.src;
-
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
     });
 
 });
 
-if (closeBtn) {
+// ======================
+// GALLERY
+// ======================
 
-    closeBtn.addEventListener("click", () => {
+const images=document.querySelectorAll(".gallery-img");
 
-        lightbox.classList.remove("active");
+const lightbox=document.getElementById("lightbox");
 
-    });
+const lightboxImg=document.getElementById("lightbox-img");
+
+const closeBtn=document.getElementById("closeBtn");
+
+const prevBtn=document.getElementById("prevBtn");
+
+const nextBtn=document.getElementById("nextBtn");
+
+let currentIndex=0;
+
+function showImage(index){
+
+lightbox.classList.add("active");
+
+lightboxImg.src=images[index].src;
+
+currentIndex=index;
 
 }
 
-if (lightbox) {
+images.forEach((img,index)=>{
 
-    lightbox.addEventListener("click", (e) => {
+img.addEventListener("click",()=>{
 
-        if (e.target === lightbox) {
+showImage(index);
 
-            lightbox.classList.remove("active");
+});
 
-        }
+});
 
-    });
+nextBtn.addEventListener("click",()=>{
+
+currentIndex++;
+
+if(currentIndex>=images.length){
+
+currentIndex=0;
 
 }
 
-// ---------- ESC CLOSE ----------
-
-document.addEventListener("keydown", (e) => {
-
-    if (e.key === "Escape") {
-
-        lightbox.classList.remove("active");
-
-    }
+showImage(currentIndex);
 
 });
 
-// ---------- FADE ANIMATION ----------
+prevBtn.addEventListener("click",()=>{
 
-const observer = new IntersectionObserver((entries) => {
+currentIndex--;
 
-    entries.forEach(entry => {
+if(currentIndex<0){
 
-        if (entry.isIntersecting) {
+currentIndex=images.length-1;
 
-            entry.target.classList.add("show");
+}
 
-        }
-
-    });
-
-}, {
-    threshold: 0.15
-});
-
-document.querySelectorAll("section,.video-card,.about-card,.contact-card").forEach(el => {
-
-    el.classList.add("fade");
-
-    observer.observe(el);
+showImage(currentIndex);
 
 });
 
-// ---------- HEADER SHADOW ----------
+closeBtn.addEventListener("click",()=>{
 
-window.addEventListener("scroll", () => {
+lightbox.classList.remove("active");
 
-    const header = document.querySelector("header");
+});
 
-    if (!header) return;
+lightbox.addEventListener("click",(e)=>{
 
-    if (window.scrollY > 80) {
+if(e.target===lightbox){
 
-        header.style.boxShadow = "0 10px 30px rgba(0,0,0,.35)";
+lightbox.classList.remove("active");
 
-    } else {
+}
 
-        header.style.boxShadow = "none";
+});
 
-    }
+document.addEventListener("keydown",(e)=>{
+
+if(!lightbox.classList.contains("active")) return;
+
+if(e.key==="Escape"){
+
+lightbox.classList.remove("active");
+
+}
+
+if(e.key==="ArrowRight"){
+
+nextBtn.click();
+
+}
+
+if(e.key==="ArrowLeft"){
+
+prevBtn.click();
+
+}
+
+});
+
+// ======================
+// MOBILE SWIPE
+// ======================
+
+let startX=0;
+
+lightbox.addEventListener("touchstart",(e)=>{
+
+startX=e.touches[0].clientX;
+
+});
+
+lightbox.addEventListener("touchend",(e)=>{
+
+let endX=e.changedTouches[0].clientX;
+
+if(startX-endX>50){
+
+nextBtn.click();
+
+}
+
+if(endX-startX>50){
+
+prevBtn.click();
+
+}
+
+});
+
+// ======================
+// HEADER SHADOW
+// ======================
+
+const header=document.querySelector("header");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>50){
+
+header.style.boxShadow="0 10px 30px rgba(0,0,0,.35)";
+
+}else{
+
+header.style.boxShadow="none";
+
+}
 
 });
 
